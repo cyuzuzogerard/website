@@ -57,7 +57,7 @@ if(isset($_SESSION["sender"]))
     <tr><td>postname</td><td><select name="pn">
         <option value="">please select post</option>
         <?php
-        include"../web.db/cannection.hph";
+        include"../web_db/cannection.hph";
         $query=mysqli_query($conn,"select distinct postname from posts inner join candidates on postid=candidates.postid order by postname asc");
         while ($row=mysqli_fetch_array($query)) {?>
             <option><?php echo$row["postname"];?></option>
@@ -68,13 +68,13 @@ if(isset($_SESSION["sender"]))
 if (isset($_POST["checkbtn"])){
     $pname=$_POST["pn"];
     include"../web_db/connection.php";
-    $select=mysqli_query($conn,"select posts.postid,posts.postname,candidates.cnid,candidates.fistname,candidates.lastname.candidates.gendar,candidates.phone,candidates.marks form posts inner join candidates on posts.postid=candidates.postid where posts.postname='$pname'order by candidates.marks desc");
+    $select=mysqli_query($conn,"select posts.postid,posts.postname,candidates.cnid,candidates.fistname,candidates.lastname,candidates.gendar,candidates.phone_number,candidates.marks form posts inner join candidates on posts.post_id=candidates.postid where posts.postname='$pname'order by candidates.marks desc");
         echo"<table>";
         echo"<tr bgcolor='orange'>"."<th>"."no"."</th>"."<th>"."NATIONAL ID"."<th>"."<th>"."LASTNAME"."<th>"."<th>"."GENDAR"."<th>"."<th>"."DATE OF BIRTH"."<th>"."<th>"."POSTNAME"."<th>"."<th>"."EXAM DATE"."<th>"."<th>"."PHONE NUMBER"."<th>"."<th>"."marks"."</th>"."</tr>";
         $i=1;
         $check=mysqli_num_rows($select);
         while($rowca= mysqli_fetch_array($select)){
-            echo"<tr>"."<td>"."<td>".$i."</td>"."<td>".$rowca["cnid"]."</td>"."<td>"."<td>".$rowca["fistname"]."<td>"."<td>".$rowca["lastname"]."</td>"."<td>".$rowca["gendar"]."</td>"."<td>".$rowca["dateofbirth"]."</td>"."<td>".$rowca["postname"]."</td>"."<td>".$rowca["examdate"]."<td>"."<td>".$rowca["phone"]."</td>"."<td>".$rowca["marks"]."</td>"."</tr>";
+            echo"<tr>"."<td>"."<td>".$i."</td>"."<td>".$rowca["cnid"]."</td>"."<td>"."<td>".$rowca["fistname"]."<td>"."<td>".$rowca["lastname"]."</td>"."<td>".$rowca["gendar"]."</td>"."<td>".$rowca["dateofbirth"]."</td>"."<td>".$rowca["postname"]."</td>"."<td>".$rowca["examdate"]."<td>"."<td>".$rowca["phone_number9"]."</td>"."<td>".$rowca["marks"]."</td>"."</tr>";
         $i++;  }
 
     }echo"</table>";
